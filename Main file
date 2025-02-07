@@ -32,3 +32,16 @@ def calculate_outcome(pass_mark, defer_mark, fail_mark):
     }
 
     return outcomes.get((pass_mark, defer_mark, fail_mark))
+
+    # Geting the input
+    def get_credit_input(prompt, valid_credit_values):
+        while True:
+            try:
+                value = int(input(prompt))
+                if value in valid_credit_values:
+                    return value
+                else:
+                    print("Out of range.")
+            except ValueError:
+                print("Integer required.")
+    

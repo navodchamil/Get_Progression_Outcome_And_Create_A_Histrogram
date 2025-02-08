@@ -45,3 +45,42 @@ def calculate_outcome(pass_mark, defer_mark, fail_mark):
             except ValueError:
                 print("Integer required.")
     
+
+# Creating the histogram
+def create_histogram(students):
+    window = GraphWin("Progression Histogram", 1200, 700)
+    window.setBackground("white")
+
+    categories = ["Progress",
+                  "Progress (module trailer)", "Module retriever", "Exclude"]
+    counts = [students.count(cat) for cat in categories]
+
+    x = 300
+    y = 75
+    total_students = len(students)
+
+    total_students_text = Text(
+        Point(window.getWidth() / 2, 50), "Histogram Results")
+    total_students_text.setSize(18)
+    total_students_text.draw(window)
+
+    total_students_text = Text(
+        Point(window.getWidth() / 2, 80), f"Total Students: {total_students}")
+    total_students_text.setSize(12)
+    total_students_text.draw(window)
+
+    for cat, count in zip(categories, counts):
+        bar = Rectangle(Point(x, 400 - 300 * count /
+                        total_students), Point(x + y, 400))
+        bar.setFill("blue")
+        bar.draw(window)
+
+        label = Text(Point(x + y / 2, 430), f"{cat}\n({count} students)")
+
+        label.draw(window)
+
+        x += 2 * y
+
+    window.getMouse()
+    window.close()
+
